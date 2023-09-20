@@ -6,7 +6,8 @@ var messageInput = document.getElementById("message");
 
 var textCanvas = document.getElementById("textCanvas");
 var tctx = textCanvas.getContext("2d");
-var imageExtension = "jpg";
+var acceptedImageExtension = "jpg";
+const correctImageExtensions = ["jpg", "png"];
 //handle decoding
 var decodeCanvas = document.getElementById("imageCanvas2");
 var dctx = decodeCanvas.getContext("2d");
@@ -56,10 +57,20 @@ function handleImage(e) {
       console.log("pixels outside of message borders: " + pixelsOutMsg);
       ctx.putImageData(imgData, 0, 0);
     };
-    img.src = event.target.result;
+    var imageExtension = e.target.files[0].name.split(".")[1];
+    if (correctImageExtensions.includes(imageExtension)) {
+      console.log("aaa");
+      img.src = event.target.result;
+    } else {
+      window.NotificationUtils.showNotification(
+        "Incorrect File Extension",
+        "Incorrect File Extension - Try .jpg or .png"
+      );
+      return;
+    }
   };
   reader.readAsDataURL(e.target.files[0]);
-  imageExtension = e.target.files[0].name.split(".")[1];
+  acceptedImageExtension = e.target.files[0].name.split(".")[1];
 }
 
 function handleImage2(e) {
@@ -97,7 +108,7 @@ function handleImage2(e) {
 }
 
 function download() {
-  const filename = "encoded." + imageExtension;
+  const filename = "encoded." + acceptedImageExtension;
   let lnk = document.createElement("a"),
     e;
   lnk.download = filename;
