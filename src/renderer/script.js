@@ -6,12 +6,13 @@ var messageInput = document.getElementById("message");
 
 var textCanvas = document.getElementById("textCanvas");
 var tctx = textCanvas.getContext("2d");
-var acceptedImageExtension = "jpg";
+var currImageExtension = "jpg";
 const correctImageExtensions = ["jpg", "png"];
 //handle decoding
 var decodeCanvas = document.getElementById("imageCanvas2");
 var dctx = decodeCanvas.getContext("2d");
 var imageLoader2 = document.getElementById("imageLoader2");
+var worky = false
 imageLoader2.addEventListener("change", handleImage2, false);
 
 function handleImage(e) {
@@ -60,8 +61,10 @@ function handleImage(e) {
     var imageExtension = e.target.files[0].name.split(".")[1];
     if (correctImageExtensions.includes(imageExtension)) {
       console.log("aaa");
+      worky = true
       img.src = event.target.result;
     } else {
+      worky = false
       window.NotificationUtils.showNotification(
         "Incorrect File Extension",
         "Incorrect File Extension - Try .jpg or .png"
@@ -70,7 +73,7 @@ function handleImage(e) {
     }
   };
   reader.readAsDataURL(e.target.files[0]);
-  acceptedImageExtension = e.target.files[0].name.split(".")[1];
+  currImageExtension = e.target.files[0].name.split(".")[1];
 }
 
 function handleImage2(e) {
@@ -108,33 +111,35 @@ function handleImage2(e) {
 }
 
 function download() {
-  const filename = "encoded." + acceptedImageExtension;
-  let lnk = document.createElement("a"),
-    e;
-  lnk.download = filename;
-  let c = document.getElementById("imageCanvas");
-  lnk.href = c.toDataURL();
-  if (document.createEvent) {
-    e = document.createEvent("MouseEvents");
-    e.initMouseEvent(
-      "click",
-      true,
-      true,
-      window,
-      0,
-      0,
-      0,
-      0,
-      0,
-      false,
-      false,
-      false,
-      false,
-      0,
-      null
-    );
-    lnk.dispatchEvent(e);
-  } else if (lnk.fireEvent) {
-    lnk.fireEvent("onclick");
+  if (worky) {
+    const filename = "encoded." + currImageExtension;
+    let lnk = document.createElement("a"),
+      e;
+    lnk.download = filename;
+    let c = document.getElementById("imageCanvas");
+    lnk.href = c.toDataURL();
+    if (document.createEvent) {
+      e = document.createEvent("MouseEvents");
+      e.initMouseEvent(
+        "click",
+        true,
+        true,
+        window,
+        0,
+        0,
+        0,
+        0,
+        0,
+        false,
+        false,
+        false,
+        false,
+        0,
+        null
+      );
+      lnk.dispatchEvent(e);
+    } else if (lnk.fireEvent) {
+      lnk.fireEvent("onclick");
+    }
   }
 }

@@ -16,7 +16,7 @@
 		<!-- <p>This tool creates a canvas with your image, and an identically sized canvas with your text. It then searches through each pixel of the text canvas, if it sees black, it knows the pixel it's viewing is part of the message. It will find the pixel at the same point in your image canvas, and make sure that the green value of the RGB ends in a 7. If it sees white or transparent, it knows that it's not on the text, and will make sure the identically located pixel on your image canvas's green value does NOT end in 7. After this has been performed on the whole image, we now have an image where every pixel's green value does NOT end in a 7, except where it will spell a message. The decode function reverses this, it looks through the pixels of the uploaded image, and hides any pixel where it doesn't find a green value ending in 7. It's important to note that not all steganography is the same, there are other tools out there that use the alpha chanel, where we're affecting the green channel here. Images encoded with this tool should only be decoded by this tool, etc.</p> -->
 		<div>
 			<h2>Zakoduj obrazek wiadomością</h2>
-			<p>najpierw wpisz wiadomość, a potem wrzuć obraz, aby zakodować</p> 
+			<p>najpierw wpisz wiadomość, a potem wrzuć obraz (JPG/PNG), aby zakodować</p> 
 			<label>Wiadomość do ukrycia w obrazku:</label>
 			<input type="password" id="message" placeholder="Wpisz..">
 			<label>Wrzuć obrazek:</label>
