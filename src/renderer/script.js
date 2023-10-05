@@ -23,13 +23,14 @@ function handleImage(e) {
     img.onload = function () {
       canvas.width = img.width;
       canvas.height = img.height;
+      const height = canvas.height
       textCanvas.width = img.width;
       textCanvas.height = img.height;
-      tctx.font = "30px Arial";
+      tctx.font = height*0.05+"px Arial";
       var messageText = messageInput.value.length
         ? messageInput.value
         : "witam";
-      tctx.fillText(messageText, 10, 50);
+      tctx.fillText(messageText, height*0.03, height*0.07);
       ctx.drawImage(img, 0, 0);
       var imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
       var textData = tctx.getImageData(0, 0, canvas.width, canvas.height);
@@ -85,7 +86,7 @@ function handleImage2(e) {
     img2.onload = function () {
       console.log("img2 loaded");
       decodeCanvas.width = img2.width;
-      decodeCanvas.height = img2.height;
+      decodeCanvas.height = img2.height*0.1;
       dctx.drawImage(img2, 0, 0);
       var decodeData = dctx.getImageData(
         0,
