@@ -9,7 +9,7 @@
 }
 
 body {
-  background-color: #111111;
+  background: radial-gradient(circle, rgb(23 0 74) 0%, rgb(44 0 28) 100%);
 }
 
 #textCanvas {
@@ -36,6 +36,7 @@ body {
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+  height: min-content;
 }
 
 .wrap div * {
